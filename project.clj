@@ -7,6 +7,7 @@
                  [ring/ring-defaults "0.2.1"]]
   :plugins [[lein-ring "0.9.7"]]
   :ring {:handler cpu-soak.handler/app}
+  :uberjar-name "cpu_soak.jar"
   :profiles
   {:dev {:dependencies [[com.taoensso/tufte "2.0.1"]
 			[criterium "0.4.4"]
