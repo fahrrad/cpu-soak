@@ -1,11 +1,14 @@
-FROM openjdk:11-jre-sid
+FROM clojure:lein as builder
 
-COPY target/cpu_soak.jar /app.jar
+COPY ./ /source/ 
+WORKDIR /source
+RUN lein ring uberjar
 
-RUN adduser --home /cpusoak --uid 1001 cpusoak -q  --disabled-login --disabled-password
+FROM openjdk:11-jre-slim
 
+EXPOSE 3000
+COPY --from=builder /source/target/cpu_soak.jar /app.jar
+RUN useradd --home /cpusoak --uid 1001 cpusoak 
 USER cpusoak
-
-
-CMD ["/usr/bin/java", "-jar", "/app.jar"]
-
+ENTRYPOINT ["/usr/bin/java"]
+CMD ["-jar", "/app.jar"]
