@@ -1,4 +1,4 @@
-FROM clojure:lein as builder
+FROM clojure:lein
 
 COPY ./ /source/ 
 WORKDIR /source
