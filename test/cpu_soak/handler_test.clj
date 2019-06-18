@@ -7,6 +7,7 @@
 	(testing "tan atan reverses == 1"
 		(is (< (Math/abs (double (- 1.0 (tan-atan 200)))) 0.000001))))
 
+;; TEST
 (deftest test-app
   (testing "main route"
     (let [response (app (mock/request :get "/"))]
